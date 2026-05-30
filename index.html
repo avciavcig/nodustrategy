@@ -185,18 +185,26 @@ Kariyeri boyunca çok uluslu organizasyonlarda stratejik ve operasyonel sorumlul
 <script>
 function openModal(){document.getElementById('contactModal').classList.add('open');document.body.style.overflow='hidden'}
 function closeModal(){document.getElementById('contactModal').classList.remove('open');document.body.style.overflow=''}
+const WA_NUMBER='90XXXXXXXXXX'; // Numaranı buraya yaz: örnek 905301234567
+function getFormData(){
+  return {
+    ad:document.getElementById('m-ad').value.trim(),
+    soyad:document.getElementById('m-soyad').value.trim(),
+    sirket:document.getElementById('m-sirket').value.trim(),
+    tel:document.getElementById('m-tel').value.trim(),
+    email:document.getElementById('m-email-form').value.trim(),
+    mesaj:document.getElementById('m-mesaj').value.trim()
+  };
+}
 function submitForm(){
-  const ad=document.getElementById('m-ad').value.trim();
-  const soyad=document.getElementById('m-soyad').value.trim();
-  const sirket=document.getElementById('m-sirket').value.trim();
-  const tel=document.getElementById('m-tel').value.trim();
-  const email=document.getElementById('m-email-form').value.trim();
-  const mesaj=document.getElementById('m-mesaj').value.trim();
-  if(!ad||!email){alert('Ad ve e-posta zorunludur.');return;}
-  const body=encodeURIComponent('Ad Soyad: '+ad+' '+soyad+'\nŞirket: '+sirket+'\nTelefon: '+tel+'\nE-posta: '+email+'\nMesaj: '+mesaj);
-  const subject=encodeURIComponent('Nodus — İletişim Talebi: '+ad+' '+soyad);
-  window.location.href='mailto:info@nodustrategy.com?subject='+subject+'&body='+body;
+  const d=getFormData();
+  if(!d.ad||!d.email){alert('Ad ve e-posta zorunludur.');return;}
+  const msg='Merhaba, Nodus ile iletişime geçmek istiyorum.%0A%0AAd Soyad: '+encodeURIComponent(d.ad+' '+d.soyad)+'%0AŞirket: '+encodeURIComponent(d.sirket)+'%0ATelefon: '+encodeURIComponent(d.tel)+'%0AE-posta: '+encodeURIComponent(d.email)+'%0AMesaj: '+encodeURIComponent(d.mesaj);
+  window.open('https://wa.me/'+WA_NUMBER+'?text='+msg,'_blank');
   closeModal();
+  document.getElementById('contactModal').innerHTML='<div class="modal" style="text-align:center;padding:64px 48px"><div style="font-size:40px;margin-bottom:16px">✓</div><div style="font-family:\'Cormorant Garamond\',serif;font-size:24px;color:#0f1f3d;margin-bottom:12px">Teşekkürler</div><div style="font-size:14px;color:#7a8090;line-height:1.7">WhatsApp üzerinden mesajınız iletildi.<br>En kısa sürede dönüş yapacağız.</div><button onclick="closeModal()" style="margin-top:32px;background:#0f1f3d;color:#fefcf8;border:none;padding:12px 28px;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;cursor:pointer;font-family:\'Instrument Sans\',sans-serif">Kapat</button></div>';
+  document.getElementById('contactModal').classList.add('open');
+  document.body.style.overflow='hidden';
 }
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
 </script>
