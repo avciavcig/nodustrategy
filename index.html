@@ -74,6 +74,22 @@ footer{padding:36px 56px;display:flex;justify-content:space-between;align-items:
 .footer-logo{font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:0.2em;text-transform:uppercase;color:var(--navy)}
 .footer-copy{font-size:11px;color:var(--muted-light);margin-top:4px}
 .footer-disc{font-size:11px;color:var(--muted-light);max-width:400px;line-height:1.6;text-align:right}
+/* MODAL */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(15,31,61,0.7);z-index:999;align-items:center;justify-content:center;padding:24px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--cream);max-width:520px;width:100%;padding:48px;position:relative}
+.modal-close{position:absolute;top:16px;right:20px;background:none;border:none;font-size:20px;cursor:pointer;color:var(--muted);line-height:1}
+.modal-close:hover{color:var(--navy)}
+.modal-title{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--navy);margin-bottom:8px}
+.modal-sub{font-size:13px;color:var(--muted);margin-bottom:32px;line-height:1.6}
+.mfield{margin-bottom:16px}
+.mfield label{display:block;font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;font-weight:500}
+.mfield input,.mfield textarea{width:100%;padding:10px 14px;border:1px solid var(--border);background:#fff;font-family:'Instrument Sans',sans-serif;font-size:14px;color:var(--navy);outline:none;transition:border 0.2s}
+.mfield input:focus,.mfield textarea:focus{border-color:var(--copper)}
+.mfield textarea{min-height:80px;resize:vertical}
+.mfield-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.modal-submit{width:100%;background:var(--navy);color:var(--cream);border:none;padding:14px;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;font-family:'Instrument Sans',sans-serif;font-weight:500;cursor:pointer;margin-top:8px;transition:background 0.2s}
+.modal-submit:hover{background:var(--navy-mid)}
 @media(max-width:960px){
   nav{padding:18px 24px}
   .hero{grid-template-columns:1fr}.hero-right{display:none}.hero-left{padding:60px 24px}
@@ -86,9 +102,28 @@ footer{padding:36px 56px;display:flex;justify-content:space-between;align-items:
 </style>
 </head>
 <body>
+<!-- MODAL -->
+<div class="modal-overlay" id="contactModal" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-title">İletişime Geçin</div>
+    <div class="modal-sub">Bilgilerinizi bırakın, en kısa sürede dönüş yapalım.</div>
+    <div class="mfield-row">
+      <div class="mfield"><label>Ad</label><input type="text" id="m-ad" placeholder="Adınız"></div>
+      <div class="mfield"><label>Soyad</label><input type="text" id="m-soyad" placeholder="Soyadınız"></div>
+    </div>
+    <div class="mfield"><label>Şirket</label><input type="text" id="m-sirket" placeholder="Şirket adı"></div>
+    <div class="mfield-row">
+      <div class="mfield"><label>Telefon</label><input type="text" id="m-tel" placeholder="+90 5xx xxx xx xx"></div>
+      <div class="mfield"><label>E-posta</label><input type="text" id="m-email-form" placeholder="email@sirket.com"></div>
+    </div>
+    <div class="mfield"><label>Mesaj (opsiyonel)</label><textarea id="m-mesaj" placeholder="Projenizi kısaca anlatın..."></textarea></div>
+    <button class="modal-submit" onclick="submitForm()">Gönder →</button>
+  </div>
+</div>
 <nav>
   <div class="nav-logo">Nodus</div>
-  <a href="#contact" class="nav-cta">İletişime Geçin →</a>
+  <a href="#" onclick="openModal();return false;" class="nav-cta">İletişime Geçin →</a>
 </nav>
 <section class="hero">
   <div class="hero-left">
@@ -137,15 +172,33 @@ Kariyeri boyunca çok uluslu organizasyonlarda stratejik ve operasyonel sorumlul
 <section class="cta" id="contact">
   <div class="cta-label">İletişim</div>
   <h2 class="cta-title">Projenizi birlikte değerlendirmek için<br><em>bizimle iletişime geçin.</em></h2>
-  <a href="mailto:info@nodustrategy.com" class="btn-light">İletişime Geçin <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></a>
+  <button onclick="openModal()" class="btn-light" style="cursor:pointer;border:none">İletişime Geçin <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
   <p class="cta-note">Sınırlı kapasite — sadece belirli projelere stratejik destek verilmektedir.</p>
 </section>
 <footer>
   <div>
     <div class="footer-logo">Nodus Strategy & Growth</div>
-    <div class="footer-copy">© 2026 · Based in İzmir, serving nationwide & internationally</div>
+    <div class="footer-copy">© 2025 · Based in İzmir, serving nationwide & internationally</div>
   </div>
   <div class="footer-disc">Nodus, yönetim ve büyüme stratejileri kapsamında danışmanlık hizmeti sunar. Tıbbi hizmet ve sağlık hizmet sunumu ilgili kuruluşların sorumluluğundadır.</div>
 </footer>
+<script>
+function openModal(){document.getElementById('contactModal').classList.add('open');document.body.style.overflow='hidden'}
+function closeModal(){document.getElementById('contactModal').classList.remove('open');document.body.style.overflow=''}
+function submitForm(){
+  const ad=document.getElementById('m-ad').value.trim();
+  const soyad=document.getElementById('m-soyad').value.trim();
+  const sirket=document.getElementById('m-sirket').value.trim();
+  const tel=document.getElementById('m-tel').value.trim();
+  const email=document.getElementById('m-email-form').value.trim();
+  const mesaj=document.getElementById('m-mesaj').value.trim();
+  if(!ad||!email){alert('Ad ve e-posta zorunludur.');return;}
+  const body=encodeURIComponent('Ad Soyad: '+ad+' '+soyad+'\nŞirket: '+sirket+'\nTelefon: '+tel+'\nE-posta: '+email+'\nMesaj: '+mesaj);
+  const subject=encodeURIComponent('Nodus — İletişim Talebi: '+ad+' '+soyad);
+  window.location.href='mailto:info@nodustrategy.com?subject='+subject+'&body='+body;
+  closeModal();
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+</script>
 </body>
 </html>
