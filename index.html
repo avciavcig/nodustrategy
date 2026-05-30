@@ -92,8 +92,8 @@ footer{padding:36px 56px;display:flex;justify-content:space-between;align-items:
 .modal-submit:hover{background:var(--navy-mid)}
 @media(max-width:960px){
   nav{padding:18px 24px}
-  .hero{grid-template-columns:1fr}.hero-right{display:none}.hero-left{padding:60px 24px}
-  .services{padding:60px 24px}.svc{grid-template-columns:40px 1fr;gap:16px}.svc-text,.svc-items{display:none}
+  .hero{grid-template-columns:1fr;min-height:100vh}.hero-right{display:none}.hero-left{padding:80px 24px 60px;justify-content:flex-end}
+  .services{padding:60px 24px}.svc{grid-template-columns:40px 1fr;gap:16px;display:flex;flex-direction:column}.svc-text{display:block;font-size:12px}.svc-items{display:flex}
   .founder{grid-template-columns:1fr}.founder-visual{min-height:240px;padding:48px 24px}.founder-content{padding:48px 24px}
   .approach{padding:60px 24px}.approach-grid{grid-template-columns:1fr 1fr}
   .cta{padding:80px 24px}
@@ -185,7 +185,7 @@ Kariyeri boyunca çok uluslu organizasyonlarda stratejik ve operasyonel sorumlul
 <script>
 function openModal(){document.getElementById('contactModal').classList.add('open');document.body.style.overflow='hidden'}
 function closeModal(){document.getElementById('contactModal').classList.remove('open');document.body.style.overflow=''}
-const WA_NUMBER='905303269373'; // Numaranı buraya yaz: örnek 905301234567
+const WA_NUMBER='905303269373'; // Numaranı buraya yaz: örnek 905301234567 // Numaranı buraya yaz: örnek 905301234567
 function getFormData(){
   return {
     ad:document.getElementById('m-ad').value.trim(),
